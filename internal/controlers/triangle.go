@@ -11,17 +11,18 @@ import (
 
 func GetSquare(ctx iris.Context, db *pg.DB) {
 	var request models.TriangleCreateReq
+	fmt.Println("request.SideA")
 	err := ctx.ReadBody(&request)
 	if err != nil {
 		ctx.StopWithProblem(iris.StatusBadRequest, iris.NewProblem().
 			Title("Triangle creation failure").DetailErr(err))
 		return
 	}
-	fmt.Println(request.Name)
-	err = repositories.CreateTriangle(db, request)
+
+	err = repositories.CreateTriangle(db, &request)
 	if err != nil {
 		ctx.StopWithProblem(iris.StatusBadRequest, iris.NewProblem().
-			Title("Triangle creation failure").DetailErr(err))
+			Title("Triangle creation failure pltcz").DetailErr(err))
 		return
 	}
 	ctx.StatusCode(iris.StatusCreated)

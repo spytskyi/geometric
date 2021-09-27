@@ -1,8 +1,12 @@
 CREATE TABLE IF NOT EXISTS triangles (
-                                           id INTEGER PRIMARY KEY,
-                                           first_name VARCHAR(255) NOT NULL,
-                                           last_name VARCHAR(255) NOT NULL,
-                                           email VARCHAR(320) NOT NULL,
-                                           created_at TIMESTAMPTZ NOT NULL DEFAULT (NOW() AT TIME ZONE 'UTC'),
-                                           updated_at TIMESTAMPTZ
+                                           id           SERIAL PRIMARY KEY,
+                                           side_a       FLOAT,
+                                           side_b       FLOAT,
+                                           side_c       FLOAT,
+                                           injection_ab FLOAT,
+                                           injection_bc FLOAT,
+                                           injection_ac FLOAT,
+                                           square       FLOAT,
+                                           created_at   TIMESTAMPTZ NOT NULL DEFAULT (NOW() AT TIME ZONE 'UTC'),
+                                           updated_at   TIMESTAMPTZ
 );
