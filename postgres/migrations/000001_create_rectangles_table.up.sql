@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS triangles (
                                            injection_ab FLOAT,
                                            injection_bc FLOAT,
                                            injection_ac FLOAT,
-                                           square       FLOAT,
+                                           area         FLOAT,
                                            created_at   TIMESTAMPTZ NOT NULL DEFAULT (NOW() AT TIME ZONE 'UTC'),
                                            updated_at   TIMESTAMPTZ
 );
