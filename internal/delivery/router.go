@@ -14,12 +14,12 @@ func NewRouter(app *iris.Application, db *pg.DB) *iris.Application {
 		// middleware
 		trianglesAPI.Use(iris.Compression)
 
-		trianglesAPI.Get("/get-square", func(ctx iris.Context) {
-			controlers.GetSquare(ctx, db)
+		trianglesAPI.Get("/get-square/{id:int64}", func(ctx iris.Context) {
+			controlers.SetArea(ctx, db)
 		})
 
 		trianglesAPI.Post("/add-square", func(ctx iris.Context) {
-			controlers.GetSquare(ctx, db)
+			controlers.GetArea(ctx, db)
 		})
 	}
 	return app

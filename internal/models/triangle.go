@@ -9,7 +9,7 @@ type Triangle struct {
 	InjectionAB float64  `pg:"injection_ab"`
 	InjectionBC float64  `pg:"injection_bc"`
 	InjectionAC float64  `pg:"injection_ac"`
-	Square      float64  `pg:"square"`
+	Area        float64  `pg:"area"`
 }
 
 type TriangleCreateReq struct {
@@ -19,7 +19,11 @@ type TriangleCreateReq struct {
 	InjectionAB float64 `json:"injection_ab"`
 	InjectionBC float64 `json:"injection_bc"`
 	InjectionAC float64 `json:"injection_ac"`
-	Square      float64 `json:"square"`
+	Area        float64 `json:"area"`
+}
+
+type TriangleGetReq struct {
+	Id int64 `pg:"id,pk"`
 }
 
 //type TriangleCreateReq struct {
