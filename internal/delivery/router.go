@@ -15,11 +15,15 @@ func NewRouter(app *iris.Application, db *pg.DB) *iris.Application {
 		trianglesAPI.Use(iris.Compression)
 
 		trianglesAPI.Get("/get-square/{id:int64}", func(ctx iris.Context) {
-			controlers.SetArea(ctx, db)
+			controlers.GetArea(ctx, db)
+		})
+
+		trianglesAPI.Get("/get-square/all-triangles", func(ctx iris.Context) {
+			controlers.GetAllArea(ctx, db)
 		})
 
 		trianglesAPI.Post("/add-square", func(ctx iris.Context) {
-			controlers.GetArea(ctx, db)
+			controlers.SetArea(ctx, db)
 		})
 	}
 	return app

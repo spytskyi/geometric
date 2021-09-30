@@ -8,7 +8,7 @@ import (
 	"github.com/kataras/iris/v12"
 )
 
-func GetArea(ctx iris.Context, db *pg.DB) {
+func SetArea(ctx iris.Context, db *pg.DB) {
 	var request models.TriangleCreateReq
 	err := ctx.ReadBody(&request)
 	if err != nil {
@@ -33,7 +33,7 @@ func GetArea(ctx iris.Context, db *pg.DB) {
 	return
 }
 
-func SetArea(ctx iris.Context, db *pg.DB) {
+func GetArea(ctx iris.Context, db *pg.DB) {
 	request, err := ctx.Params().GetInt64("id")
 	if err != nil {
 		ctx.StopWithProblem(iris.StatusBadRequest, iris.NewProblem().
@@ -41,6 +41,23 @@ func SetArea(ctx iris.Context, db *pg.DB) {
 		return
 	}
 	err = repositories.SelectDataTriangleById(db, request)
+	if err != nil {
+		ctx.StopWithProblem(iris.StatusBadRequest, iris.NewProblem().
+			Title("Triangle creation failure").DetailErr(err))
+		return
+	}
+	ctx.StatusCode(iris.StatusCreated)
+	_, err = ctx.JSON(iris.Map{"message": "OK"})
+	if err != nil {
+		ctx.StopWithProblem(iris.StatusInternalServerError, iris.NewProblem().
+			Title("Triangle creation failure").DetailErr(err))
+		return
+	}
+	return
+}
+
+func GetAllArea(ctx iris.Context, db *pg.DB) {
+	err := repositories.SelectAllTriangles(db)
 	if err != nil {
 		ctx.StopWithProblem(iris.StatusBadRequest, iris.NewProblem().
 			Title("Triangle creation failure").DetailErr(err))
